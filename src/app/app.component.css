@@ -1,0 +1,4 @@
+.main {
+  background-color: rgba(125, 174, 217, 0.15);
+  min-height: calc(100vh - 206px);
+}
