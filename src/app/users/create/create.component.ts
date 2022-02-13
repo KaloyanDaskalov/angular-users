@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
+import {ageRange, sexOptions} from '../../shared/config';
+
 @Component({
   selector: 'app-create',
   templateUrl: './create.component.html',
@@ -7,9 +9,14 @@ import { Component, OnInit } from '@angular/core';
 })
 export class CreateComponent implements OnInit {
 
-  constructor() { }
+  ageR:number[] = [];
+  sexO:string [] = []; 
 
-  ngOnInit(): void {
+  constructor() { 
+    this.ageR = ageRange;
+    this.sexO = sexOptions;
   }
+
+  ngOnInit(): void { }
 
 }

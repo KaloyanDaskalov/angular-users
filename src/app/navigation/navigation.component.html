@@ -2,24 +2,14 @@
   <div class="wrapper">
     <nav class="navigation">
       <ul class="nav nav-pills">
-        <li class="nav-item">
+        <li class="nav-item" *ngFor="let item of l">
           <a
-            class="nav-link"
+            class="nav-link fs-5"
             aria-current="page"
-            routerLink="/"
+            routerLink="{{ item.path }}"
             routerLinkActive="active"
             [routerLinkActiveOptions]="{ exact: true }"
-            >users</a
-          >
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" routerLink="/create" routerLinkActive="active"
-            >create</a
-          >
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" routerLink="/edit" routerLinkActive="active"
-            >edit</a
+            >{{ item.name }}</a
           >
         </li>
       </ul>

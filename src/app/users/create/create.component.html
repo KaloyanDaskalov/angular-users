@@ -30,18 +30,18 @@
     <label for="inputSex" class="form-label">Sex</label>
     <select id="inputSex" class="form-select">
       <option selected>Choose...</option>
-      <option>Male</option>
-      <option>Female</option>
-      <option>Gender</option>
+      <option *ngFor="let item of sexO" [value]="item">
+        {{ item }}
+      </option>
     </select>
   </div>
   <div class="col-md-6">
     <label for="inputAge" class="form-label">Age</label>
     <select id="inputAge" class="form-select">
       <option selected>Choose...</option>
-      <option>18</option>
-      <option>19</option>
-      <option>20</option>
+      <option *ngFor="let age of ageR" [value]="age">
+        {{ age }}
+      </option>
     </select>
   </div>
   <div class="col-12 d-flex justify-content-evenly p-4">
