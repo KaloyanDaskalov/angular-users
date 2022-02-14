@@ -1,51 +1,65 @@
-<form class="row g-3">
+<form class="row g-3" (ngSubmit)="onSubmit()" #f="ngForm">
   <div class="col-md-6">
-    <label for="inputFirstName" class="form-label">First Name</label>
+    <label for="firstName" class="form-label">First Name</label>
     <input
       type="text"
       class="form-control"
-      id="inputFirstName"
+      id="firstName"
       placeholder="John"
+      name="firstName"
+      ngModel
+      required
+      pattern="^[a-zA-zа-яА-Я]{2,20}$"
     />
   </div>
   <div class="col-md-6">
-    <label for="inputLastName" class="form-label">Last Name</label>
+    <label for="lastName" class="form-label">Last Name</label>
     <input
       type="text"
       class="form-control"
-      id="inputLastName"
+      id="lastName"
       placeholder="Doe"
+      name="lastName"
+      ngModel
+      required
+      pattern="^[a-zA-zа-яА-Я]{2,20}$"
     />
   </div>
   <div class="col-12">
-    <label for="inputProfession" class="form-label">Address</label>
+    <label for="profession" class="form-label">Profession</label>
     <input
       type="text"
       class="form-control"
-      id="inputProfession"
+      id="profession"
       placeholder="IT Specialist"
+      name="profession"
+      ngModel
+      required
+      pattern="^[a-zA-zа-яА-Я]{2,20}$"
     />
   </div>
   <div class="col-md-6">
-    <label for="inputSex" class="form-label">Sex</label>
-    <select id="inputSex" class="form-select">
-      <option selected>Choose...</option>
+    <label for="sex" class="form-label">Sex</label>
+    <select id="sex" class="form-select" name="sex" ngModel required>
+      <option value="" disabled>Choose...</option>
       <option *ngFor="let item of sexO" [value]="item">
         {{ item }}
       </option>
     </select>
   </div>
   <div class="col-md-6">
-    <label for="inputAge" class="form-label">Age</label>
-    <select id="inputAge" class="form-select">
-      <option selected>Choose...</option>
+    <label for="age" class="form-label">Age</label>
+    <select id="age" class="form-select" name="age" ngModel required>
+      <option value="" disabled>Choose...</option>
       <option *ngFor="let age of ageR" [value]="age">
         {{ age }}
       </option>
     </select>
   </div>
   <div class="col-12 d-flex justify-content-evenly p-4">
-    <button type="submit" class="btn btn-primary btn-lg">Create</button>
+    <button type="submit" class="btn btn-primary btn-lg" [disabled]="!f.valid">
+      Create
+    </button>
     <button type="button" class="btn btn-danger btn-lg">Cancel</button>
   </div>
 </form>
