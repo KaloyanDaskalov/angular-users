@@ -1,0 +1,7 @@
+.toast-position {
+  position: fixed;
+  z-index: 11;
+  top: 1rem;
+  right: 1rem;
+  transition: all 0.4s linear;
+}

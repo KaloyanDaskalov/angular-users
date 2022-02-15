@@ -6,6 +6,10 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./notification.component.css']
 })
 export class NotificationComponent implements OnInit {
+  
+  m:string = 'This is a toast';
+  isShow: boolean = true;
+  type:string = 'alert-success';
 
   constructor() { }
 
