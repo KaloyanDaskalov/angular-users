@@ -1,5 +1,6 @@
 import { Component, ViewChild } from '@angular/core';
 import { NgForm } from '@angular/forms';
+import {HttpClient} from '@angular/common/http'
 
 import {ageRange, sexOptions} from '../../shared/config';
 
@@ -13,10 +14,13 @@ export class CreateComponent {
   @ViewChild('f') submitForm!:NgForm;
 
   ageR:number[] = ageRange ?? [];
-  sexO:string [] = sexOptions ?? []; 
+  sexO:string [] = sexOptions ?? [];
+  buttonInnerText: string = 'Create';
+
+  constructor (private http: HttpClient) {}
 
   onSubmit() {
-    console.log(this.submitForm);
+    this.http.post<{name: string}>('https://users-f5135-default-rtdb.europe-west1.firebasedatabase.app/users.json', this.submitForm.value)
+      .subscribe( _ => this.submitForm.reset() );
   }
-
 }

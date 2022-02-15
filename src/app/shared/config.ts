@@ -2,8 +2,7 @@ import { AstMemoryEfficientTransformer } from "@angular/compiler";
 
 export const links:{name:string, path:string}[] = [
     {name: 'Users', path: '/'},
-    {name: 'Create', path: '/create'},
-    {name: 'Edit', path: '/edit'},
+    {name: 'Create', path: '/create'}
 ];
 
 export const ageRange:number [] = new Array(53)

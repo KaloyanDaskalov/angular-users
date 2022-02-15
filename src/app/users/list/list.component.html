@@ -1,84 +1,22 @@
 <div class="container">
   <div class="row hidden-md-up">
     <!-- card start -->
-    <div class="col-md-4">
+    <div class="col-md-4" *ngFor="let u of users">
       <div class="card p-2">
         <div class="card-block">
-          <h4 class="card-title">John Doe</h4>
-          <h6 class="card-subtitle text-muted">Developer</h6>
+          <h4 class="card-title">{{ u.firstName }} {{ u.lastName }}</h4>
+          <h6 class="card-subtitle text-muted">{{ u.profession }}</h6>
           <p class="card-text text-muted p-y-1">
-            <span>25</span> years old <span>male</span>
+            <span class="fw-bold">{{ u.age }}</span> years old
+            <span class="fw-bold">{{ u.sex }}</span>
           </p>
-          <a href="#" class="btn btn-primary me-4">Edit</a>
-          <a href="#" class="btn btn-danger">Delete</a>
+          <a [routerLink]="['edit', u.id]" class="btn btn-primary me-4">Edit</a>
+          <button (click)="onDelete(u.id)" class="btn btn-danger">
+            Delete
+          </button>
         </div>
       </div>
     </div>
     <!-- card end -->
-    <div class="col-md-4">
-      <div class="card p-2">
-        <div class="card-block">
-          <h4 class="card-title">John Doe</h4>
-          <h6 class="card-subtitle text-muted">Developer</h6>
-          <p class="card-text text-muted p-y-1">
-            <span>25</span> years old <span>male</span>
-          </p>
-          <a href="#" class="btn btn-primary me-4">Edit</a>
-          <a href="#" class="btn btn-danger">Delete</a>
-        </div>
-      </div>
-    </div>
-    <div class="col-md-4">
-      <div class="card p-2">
-        <div class="card-block">
-          <h4 class="card-title">John Doe</h4>
-          <h6 class="card-subtitle text-muted">Developer</h6>
-          <p class="card-text text-muted p-y-1">
-            <span>25</span> years old <span>male</span>
-          </p>
-          <a href="#" class="btn btn-primary me-4">Edit</a>
-          <a href="#" class="btn btn-danger">Delete</a>
-        </div>
-      </div>
-    </div>
-    <div class="col-md-4">
-      <div class="card p-2">
-        <div class="card-block">
-          <h4 class="card-title">John Doe</h4>
-          <h6 class="card-subtitle text-muted">Developer</h6>
-          <p class="card-text text-muted p-y-1">
-            <span>25</span> years old <span>male</span>
-          </p>
-          <a href="#" class="btn btn-primary me-4">Edit</a>
-          <a href="#" class="btn btn-danger">Delete</a>
-        </div>
-      </div>
-    </div>
-    <div class="col-md-4">
-      <div class="card p-2">
-        <div class="card-block">
-          <h4 class="card-title">John Doe</h4>
-          <h6 class="card-subtitle text-muted">Developer</h6>
-          <p class="card-text text-muted p-y-1">
-            <span>25</span> years old <span>male</span>
-          </p>
-          <a href="#" class="btn btn-primary me-4">Edit</a>
-          <a href="#" class="btn btn-danger">Delete</a>
-        </div>
-      </div>
-    </div>
-    <div class="col-md-4">
-      <div class="card p-2">
-        <div class="card-block">
-          <h4 class="card-title">John Doe</h4>
-          <h6 class="card-subtitle text-muted">Developer</h6>
-          <p class="card-text text-muted p-y-1">
-            <span>25</span> years old <span>male</span>
-          </p>
-          <a href="#" class="btn btn-primary me-4">Edit</a>
-          <a href="#" class="btn btn-danger">Delete</a>
-        </div>
-      </div>
-    </div>
   </div>
 </div>
