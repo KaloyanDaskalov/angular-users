@@ -10,6 +10,8 @@ import { FooterComponent } from './footer/footer.component';
 import { ListComponent } from './users/list/list.component';
 import { CreateComponent } from './users/create-edit/create.component';
 import { EditComponent } from './users/create-edit/edit.component';
+import { ModalComponent } from './shared/modal/modal.component';
+import { NotificationComponent } from './shared/notification/notification.component';
 
 @NgModule({
   declarations: [
@@ -18,7 +20,9 @@ import { EditComponent } from './users/create-edit/edit.component';
     FooterComponent,
     ListComponent,
     CreateComponent,
-    EditComponent
+    EditComponent,
+    ModalComponent,
+    NotificationComponent
   ],
   imports: [
     BrowserModule,

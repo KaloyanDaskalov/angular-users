@@ -11,7 +11,16 @@
             <span class="fw-bold">{{ u.sex }}</span>
           </p>
           <a [routerLink]="['edit', u.id]" class="btn btn-primary me-4">Edit</a>
-          <button (click)="onDelete(u.id)" class="btn btn-danger">
+          <!-- <button (click)="onDelete(u.id)" class="btn btn-danger">
+            Delete
+          </button> -->
+          <button
+            type="button"
+            class="btn btn-danger"
+            data-bs-toggle="modal"
+            data-bs-target="#staticBackdrop"
+            (click)="onConfirm(u.id)"
+          >
             Delete
           </button>
         </div>
