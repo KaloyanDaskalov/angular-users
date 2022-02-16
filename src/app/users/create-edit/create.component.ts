@@ -1,6 +1,7 @@
 import { Component, ViewChild } from '@angular/core';
 import { NgForm } from '@angular/forms';
-import {HttpClient} from '@angular/common/http'
+import { ApiService } from 'src/app/api.service';
+import { NotificationService } from 'src/app/shared/notification/notification.service';
 
 import {ageRange, sexOptions} from '../../shared/config';
 
@@ -17,10 +18,18 @@ export class CreateComponent {
   sexO:string [] = sexOptions ?? [];
   buttonInnerText: string = 'Create';
 
-  constructor (private http: HttpClient) {}
+  constructor (private api:ApiService, private notify:NotificationService) {}
 
   onSubmit() {
-    this.http.post<{name: string}>('https://users-f5135-default-rtdb.europe-west1.firebasedatabase.app/users.json', this.submitForm.value)
-      .subscribe( _ => this.submitForm.reset() );
+    if (this.submitForm.valid) {
+      this.api.createOne(this.submitForm.value)
+      .subscribe( {
+        next: () => {
+        this.notify.notifications.next({message:'User is created', type:'s' } );
+        this.submitForm.reset()
+        },
+        error: err => this.notify.notifications.next({message: err.message, type: 'd'})
+      });
+    }
   }
 }

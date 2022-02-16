@@ -1,11 +1,11 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { NgForm } from '@angular/forms';
-import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { ActivatedRoute } from '@angular/router';
+import { ApiService } from 'src/app/api.service';
 
-import { User } from 'src/app/shared/interfaces';
 import {ageRange, sexOptions} from '../../shared/config';
+import { NotificationService } from 'src/app/shared/notification/notification.service';
 
 @Component({
   selector: 'app-edit',
@@ -23,7 +23,8 @@ export class EditComponent implements OnInit {
   id:string ='';
 
   constructor (
-    private http: HttpClient,
+    private api: ApiService,
+    private notify: NotificationService,
     private route:ActivatedRoute,
     private router: Router) {
     this.buttonInnerText = 'Edit' 
@@ -31,18 +32,31 @@ export class EditComponent implements OnInit {
 
   ngOnInit(): void {
     this.id = this.route.snapshot.params['id'];
-    this.http.get<{[key: string]: User}>(`https://users-f5135-default-rtdb.europe-west1.firebasedatabase.app/users/${this.id}.json`)
-    .subscribe( x => this.submitForm.setValue(x) );
+    if(this.id) {
+      this.api.getOne(this.id)
+      .subscribe( {
+        next: x => this.submitForm.setValue(x),
+        error: err => {
+          this.notify.notifications.next({ message: err.message, type: 'd'});
+        }
+      });
+    } else {
+      this.router.navigate(['/']);
+    }
   }
 
 
   onSubmit() {
-    if(this.submitForm.valid) {
-      this.http.patch<User>(`https://users-f5135-default-rtdb.europe-west1.firebasedatabase.app/users/${this.id}.json`, this.submitForm.value)
-        .subscribe(_ => {
+    if(this.submitForm.valid && this.id) {
+      this.api.editOne(this.id, this.submitForm.value)
+        .subscribe( {
+          next: () => {
           this.submitForm.reset();
+          this.notify.notifications.next({ message: 'User updated successful', type: 's'});
           this.router.navigate(['/']);
-        });
+        },
+        error: err => this.notify.notifications.next({ message: err.message, type: 'd'})
+      });
     }
   }
 }

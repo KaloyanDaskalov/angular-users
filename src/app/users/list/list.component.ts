@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
-import { map } from 'rxjs/operators';
 import { ModalService } from 'src/app/shared/modal/modal.service';
 
 import { User } from 'src/app/shared/interfaces';
+import { NotificationService } from 'src/app/shared/notification/notification.service';
+import { ApiService } from 'src/app/api.service';
 
 @Component({
   selector: 'app-list',
@@ -16,30 +16,33 @@ export class ListComponent implements OnInit {
   id: string | undefined;
 
   constructor( 
-    private http: HttpClient, 
-    private modalService: ModalService ) { }
+    private api: ApiService, 
+    private modalService: ModalService,
+    private notify: NotificationService) { }
 
   ngOnInit(): void {
     this.fetchUsers();
   }
 
   fetchUsers(): void {
-    this.http.get<{[key: string]: User}>('https://users-f5135-default-rtdb.europe-west1.firebasedatabase.app/users.json')
-    .pipe(
-      map(usersData => Object.entries(usersData).map(x => {
-        x[1].id = x[0]
-        return x[1]
-      }))
-    )
-    .subscribe(u => this.users = u);
+    this.api.getAll()
+        .subscribe( {
+          next: u => this.users = u,
+          error: err => this.notify.notifications.next({message: err.message, type:'d'})
+        }
+      )
   }
 
   public onDelete = () => {
     if(this.id) {
-      this.http.delete(`https://users-f5135-default-rtdb.europe-west1.firebasedatabase.app/users/${this.id}.json`)
-        .subscribe( _ => {
+      this.api.deleteOne(this.id)
+      .subscribe( {
+        next: () => {
+          this.notify.notifications.next({message:'User has been deleted', type:'d'});
           this.fetchUsers();
-        });
+        },
+        error: err => this.notify.notifications.next({message: err.message, type:'d'})
+      });
     }
   }
 
