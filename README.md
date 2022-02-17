@@ -6,6 +6,8 @@ This project was generated with [Angular CLI](https://github.com/angular/angular
 
 [![Netlify Status](https://api.netlify.com/api/v1/badges/6f268a79-f2d3-4af3-871e-517daa564417/deploy-status)](https://app.netlify.com/sites/users-demo/deploys)
 
+[See project in action](https://users-demo.netlify.app)
+
 This is a demo user dashboard app for view, add, edit and delete users with global notifications and modal alert on delete user, and template driven form validations.In project are used Bootstrap for UI/UX and Firebase as backend.
 
 Dependencies:
