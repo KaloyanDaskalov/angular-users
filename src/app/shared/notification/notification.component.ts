@@ -2,6 +2,7 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import { NotificationService } from './notification.service';
 
 import { tap, delay } from 'rxjs/operators';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-notification',
@@ -10,17 +11,18 @@ import { tap, delay } from 'rxjs/operators';
 })
 export class NotificationComponent implements OnInit, OnDestroy {
   
-  m:string = 'This is a toast';
+  m:string = '';
   isShow: boolean = false;
-  type:string = 'alert-success';
+  type:string = '';
+  sub!:Subscription;
 
   constructor(private notify: NotificationService) { }
 
   ngOnInit(): void {
-    this.notify.notifications
+    this.sub =this.notify.notifications
       .pipe(
         tap(d => {
-          this.isShow = true;
+          this.isShow = !!d.message;
           this.m = d.message;
           switch(d.type) {
             case 'd': 
@@ -40,7 +42,7 @@ export class NotificationComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
-      this.notify.notifications.unsubscribe();
+    this.sub.unsubscribe();
   }
 
 }
