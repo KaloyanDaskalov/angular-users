@@ -5,16 +5,14 @@ import { links } from '../shared/config';
 @Component({
   selector: 'app-footer',
   templateUrl: './footer.component.html',
-  styleUrls: ['./footer.component.css']
+  styleUrls: ['./footer.component.css'],
 })
 export class FooterComponent implements OnInit {
-
-  l:{name:string, path: string}[] = [];
+  l: { name: string; path: string }[] = [];
+  date: number = new Date().getFullYear();
   constructor() {
     this.l = links;
   }
 
-  ngOnInit(): void {
-  }
-
+  ngOnInit(): void {}
 }
